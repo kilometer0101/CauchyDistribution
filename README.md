@@ -195,5 +195,7 @@ ggsave("fig/cauchydist.png", g, width = 5, height = 6)
 
 ![](fig/pdf.png)
 
+補足: 正規分布の平均はすぐに収束
 
+![](fig/norm.jpg)
 
