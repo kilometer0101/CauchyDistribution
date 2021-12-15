@@ -34,7 +34,7 @@ N <- 5000
 
 df_cauchy <-
   tibble(N = 1:N,
-         theta = runif(N, 0, 2*pi)) %>%
+         theta = runif(N, 0, 2 * pi)) %>%
   mutate(val = 1 / tan(theta / 2)) %>% 
   mutate(mean = cumsum(val) / N) %>% 
   mutate(x = sin(theta),
