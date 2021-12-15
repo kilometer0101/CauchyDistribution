@@ -109,7 +109,8 @@ g_plot <-
              color = "red", size = 1.5) +
   geom_text(data = dat_tail,
             aes(label = str_c("N=", N)),
-            x = -.l, y = 1, hjust = 0, vjust = 1) +
+            x = -.l, y = 1, 
+            hjust = 0, vjust = 1) +
   scale_x_continuous(limits = c(-.l, .l)) +
   scale_y_continuous(limits = c(-1, 1)) +
   theme_classic() +
@@ -123,9 +124,11 @@ g_dens_u <-
   geom_vline(data = dat_tail,
              aes(xintercept = theta),
              color = "blue", linetype = "dotted") +
-  geom_point(y = 0, color = "blue", alpha = .alpha, size = 0.5) +
+  geom_point(y = 0, 
+             color = "blue", alpha = .alpha, size = 0.5) +
   geom_point(data = dat_tail,
-             y = 0, color = "blue", size = 1) +
+             y = 0, 
+             color = "blue", size = 1) +
   scale_x_continuous(limits = c(0, 2 * pi),
                      breaks = c(0, pi, 2 * pi),
                      labels = c("0", "pi", "2pi")) +
@@ -141,7 +144,8 @@ g_dens <-
   aes(x = val) +
   geom_density(color = "red", fill = "pink") +
   geom_vline(xintercept = 0, color = "darkgrey") +
-  geom_point(y = 0, color = "red", alpha = .alpha) +
+  geom_point(y = 0, 
+             color = "red", alpha = .alpha) +
   geom_vline(data = dat_tail,
              aes(xintercept = val),
              color = "red", linetype = "dotted") +
