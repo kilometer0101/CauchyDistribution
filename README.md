@@ -120,7 +120,7 @@ g_plot <-
 g_dens_u <-
   dat_i %>% 
   ggplot() +
-  aes(theta) +
+  aes(x = theta) +
   geom_density(color = "blue", fill = "skyblue") +
   geom_vline(data = dat_i %>% filter(N == i),
              aes(xintercept = theta),
@@ -143,7 +143,7 @@ g_dens_u <-
 g_dens <-
   dat_i %>% 
   ggplot() +
-  aes(val) +
+  aes(x = val) +
   geom_density(color = "red", fill = "pink") +
   geom_vline(xintercept = 0, color = "darkgrey") +
   geom_point(aes(x = val, y = 0), 
@@ -165,7 +165,7 @@ g_dens <-
 g_mean <-
   dat_i %>% 
   ggplot() +
-  aes(mean, N) +
+  aes(x = mean, y = N) +
   geom_vline(xintercept = 0, color = "darkgrey") +
   geom_path(color = "red", size = 1) +
   scale_x_continuous(limits = c(-.l, .l)) +
