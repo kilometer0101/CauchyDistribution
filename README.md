@@ -11,6 +11,11 @@ output:
 
 ![](fig/Cauchy.png)
 
+平均が収束しない理由: ゼロに近づくのと同じ程度、∞に近づくから
+
+![](fig/Cauchy_mean.png)
+
+
 ライブラリ読み込み
 
 
