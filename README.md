@@ -73,8 +73,7 @@ dat_tail <-
 
 # 単位円と3点の描画
 g_plot <-
-  dat_i %>% 
-  ggplot() +
+  ggplot(data = dat_i) +
   aes(x = x, y = y) +
   geom_hline(yintercept = 0, color = "darkgrey") +
   geom_vline(xintercept = 0, color = "darkgrey") +
@@ -118,8 +117,7 @@ g_plot <-
 
 # thetaの確率密度分布
 g_dens_u <-
-  dat_i %>% 
-  ggplot() +
+  ggplot(data = dat_i) +
   aes(x = theta) +
   geom_density(color = "blue", fill = "skyblue") +
   geom_vline(data = dat_tail,
@@ -139,8 +137,7 @@ g_dens_u <-
 
 # xの確率密度分布
 g_dens <-
-  dat_i %>% 
-  ggplot() +
+  ggplot(data = dat_i) +
   aes(x = val) +
   geom_density(color = "red", fill = "pink") +
   geom_vline(xintercept = 0, color = "darkgrey") +
@@ -160,8 +157,7 @@ g_dens <-
 
 # xの平均の推移
 g_mean <-
-  dat_i %>% 
-  ggplot() +
+  ggplot(data = dat_i) +
   aes(x = mean, y = N) +
   geom_vline(xintercept = 0, color = "darkgrey") +
   geom_path(color = "red", size = 1) +
