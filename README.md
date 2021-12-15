@@ -130,7 +130,7 @@ g_dens_u <-
   geom_point(data = dat_i %>% filter(N == i),
              aes(x = theta, y = 0), 
              color = "blue", size = 1) +
-  scale_x_continuous(limits = c(0, 2* pi),
+  scale_x_continuous(limits = c(0, 2 * pi),
                      breaks = c(0, pi, 2 * pi),
                      labels = c("0", "pi", "2pi")) +
   scale_y_continuous(limits = c(0, NA),
