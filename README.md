@@ -83,7 +83,7 @@ g_plot <-
                color = "pink") +
   geom_segment(data = df_cauchy %>% filter(N == i),
                aes(x = x / abs(x) * 5, 
-                   y = 1 - (1 - y) / x * x / abs(x) * 5),
+                   y = 1 - (1 - y) / abs(x) * 5),
                yend = 1, xend = 0, 
                color = "pink") +
   geom_segment(data = df_cauchy %>% filter(N == i),
