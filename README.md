@@ -7,6 +7,10 @@ output:
 
 
 
+概念
+
+![](fig/Cauchy.png)
+
 ライブラリ読み込み
 
 
@@ -176,11 +180,11 @@ g <-
 
 
 ```r
-ggsave("fig/chauchydist.png", g, width = 5, height = 6)
+ggsave("fig/cauchydist.png", g, width = 5, height = 6)
 ```
 
 
-![](fig/chauchydist.png)
+![](fig/cauchydist.png)
 
 
 
