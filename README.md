@@ -197,6 +197,8 @@ ggsave("fig/cauchydist.png", g, width = 5, height = 6)
 
 ![](fig/norm.jpg)
 
+補足： 動作環境
+
 ```
 R version 4.0.3 (2020-10-10)
 Platform: x86_64-apple-darwin17.0 (64-bit)
