@@ -43,14 +43,14 @@ df_cauchy <-
          yend = 1)
 ```
 
-単位円描画用のデータフレーム
+単位円描画用のデータフレーム(θの取り方の問題でx,yはあえて逆にしてある)
 
 
 ```r
 en <-
   tibble(theta = seq(0, 2 * pi, length = 1000)) %>% 
-  mutate(x = cos(theta),
-         y = sin(theta))
+  mutate(y = cos(theta),
+         x = sin(theta))
 ```
 
 描画
@@ -84,7 +84,6 @@ g_plot <-
   geom_path(data = en,
             alpha  = 0.5) +
   geom_path(data = en %>% filter(theta <= df_cauchy$theta[i]),
-            aes(x = y, y = x), 
             color = "blue", size = 0.5) +
   geom_segment(data = dat_tail,
                yend = 0, xend = 0, 
