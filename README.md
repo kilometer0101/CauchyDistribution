@@ -7,12 +7,15 @@ output:
 
 
 
+ライブラリ読み込み
 
 
 ```r
 library(tidyverse)
 library(patchwork)
 ```
+
+サンプリング
 
 
 ```r
@@ -31,6 +34,7 @@ df_cauchy <-
          yend = 1)
 ```
 
+単位円描画用のデータフレーム
 
 
 ```r
@@ -40,19 +44,21 @@ en <-
          y = sin(theta))
 ```
 
+描画
 
 
 ```r
-.alpha <- 0.05
-.l <- 6
+.alpha <- 0.05  # あれこれの透明度
+.l <- 6         # 軸範囲（±）
 
-i <- 5000
+i <- 5000　　　 # 描画するサンプル番号
 
+# フィルタ
 dat_i <-
   df_cauchy %>% 
   filter(N <= i)
 
-
+# 単位円と3点の描画
 g_plot <-
   dat_i %>% 
   ggplot() +
@@ -101,6 +107,7 @@ g_plot <-
   theme_classic() +
   coord_fixed()
 
+# thetaの確率密度分布
 g_dens_u <-
   dat_i %>% 
   ggplot() +
@@ -123,7 +130,7 @@ g_dens_u <-
   xlab("theta") +
   ylab("density")
 
-
+# xの確率密度分布
 g_dens <-
   dat_i %>% 
   ggplot() +
@@ -145,6 +152,7 @@ g_dens <-
   theme(axis.title.x = element_blank()) +
   ylab("density")
 
+# xの平均の推移
 g_mean <-
   dat_i %>% 
   ggplot() +
@@ -153,12 +161,18 @@ g_mean <-
   geom_path(color = "red", size = 1) +
   scale_x_continuous(limits = c(-.l, .l)) +
   theme_classic()
+```
+
+図の合成
 
 
+```r
 g <-
   wrap_plots(g_dens_u, g_plot, g_dens, g_mean,
              heights = c(0.5, 0.7, 1, 1))
 ```
+
+保存
 
 
 ```r
