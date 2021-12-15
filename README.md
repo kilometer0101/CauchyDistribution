@@ -197,3 +197,19 @@ ggsave("fig/cauchydist.png", g, width = 5, height = 6)
 
 ![](fig/norm.jpg)
 
+```
+R version 4.0.3 (2020-10-10)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
+
+ [1] patchwork_1.1.0
+ [2] forcats_0.5.0  
+ [3] stringr_1.4.0  
+ [4] dplyr_1.0.2    
+ [5] purrr_0.3.4    
+ [6] readr_1.4.0    
+ [7] tidyr_1.1.2    
+ [8] tibble_3.0.4   
+ [9] ggplot2_3.3.5  
+[10] tidyverse_1.3.0
+```
