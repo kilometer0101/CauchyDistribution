@@ -67,48 +67,49 @@ dat_i <-
   df_cauchy %>% 
   filter(N <= i)
 
+dat_tail <-
+  df_cauchy %>% 
+  filter(N == i)
+
 # 単位円と3点の描画
 g_plot <-
   dat_i %>% 
   ggplot() +
+  aes(x = x, y = y) +
   geom_hline(yintercept = 0, color = "darkgrey") +
   geom_vline(xintercept = 0, color = "darkgrey") +
-  geom_vline(data = df_cauchy %>% filter(N == i),
+  geom_vline(data = dat_tail,
              aes(xintercept = val), 
              color = "red", linetype = "dotted") +
   geom_path(data = en,
-            aes(x = x, y = y), 
             alpha  = 0.5) +
   geom_path(data = en %>% filter(theta <= df_cauchy$theta[i]),
             aes(x = y, y = x), 
             color = "blue", size = 0.5) +
-  geom_segment(data = df_cauchy %>% filter(N == i),
-               aes(x = x, y = y),
+  geom_segment(data = dat_tail,
                yend = 0, xend = 0, 
                color = "skyblue") +
-  geom_segment(data = df_cauchy %>% filter(N == i),
-               aes(x = x, y = y),
+  geom_segment(data = dat_tail,
                yend = 1, xend = 0, 
                color = "pink") +
-  geom_segment(data = df_cauchy %>% filter(N == i),
+  geom_segment(data = dat_tail,
                aes(x = x / abs(x) * .l, 
                    y = 1 - (1 - y) / abs(x) * .l),
                yend = 1, xend = 0, 
                color = "pink") +
-  geom_segment(data = df_cauchy %>% filter(N == i),
+  geom_segment(data = dat_tail,
                aes(x = val),
                y = 0, yend = 1, xend = 0, 
                color = "pink") +
   geom_point(x = 0, y = 1) +
   geom_point(aes(x = val, y = 0), 
              color = "red", alpha = .alpha, size = 0.5) +
-  geom_point(data = df_cauchy %>% filter(N == i),
-             aes(x = x, y = y), 
+  geom_point(data = dat_tail,
              color = "blue") +
-  geom_point(data = df_cauchy %>% filter(N == i),
+  geom_point(data = dat_tail,
              aes(x = val, y = 0), 
              color = "red", size = 1.5) +
-  geom_text(data = df_cauchy %>% filter(N == i),
+  geom_text(data = dat_tail,
             aes(label = str_c("N=", N)),
             x = -.l, y = 1, hjust = 0, vjust = 1) +
   scale_x_continuous(limits = c(-.l, .l)) +
@@ -122,14 +123,12 @@ g_dens_u <-
   ggplot() +
   aes(x = theta) +
   geom_density(color = "blue", fill = "skyblue") +
-  geom_vline(data = dat_i %>% filter(N == i),
+  geom_vline(data = dat_tail,
              aes(xintercept = theta),
              color = "blue", linetype = "dotted") +
-  geom_point(aes(x = theta, y = 0), 
-             color = "blue", alpha = .alpha, size = 0.5) +
-  geom_point(data = dat_i %>% filter(N == i),
-             aes(x = theta, y = 0), 
-             color = "blue", size = 1) +
+  geom_point(y = 0, color = "blue", alpha = .alpha, size = 0.5) +
+  geom_point(data = dat_tail,
+             y = 0, color = "blue", size = 1) +
   scale_x_continuous(limits = c(0, 2 * pi),
                      breaks = c(0, pi, 2 * pi),
                      labels = c("0", "pi", "2pi")) +
@@ -146,12 +145,11 @@ g_dens <-
   aes(x = val) +
   geom_density(color = "red", fill = "pink") +
   geom_vline(xintercept = 0, color = "darkgrey") +
-  geom_point(aes(x = val, y = 0), 
-             color = "red", alpha = .alpha) +
-  geom_vline(data = dat_i %>% filter(N == i),
+  geom_point(y = 0, color = "red", alpha = .alpha) +
+  geom_vline(data = dat_tail,
              aes(xintercept = val),
              color = "red", linetype = "dotted") +
-  geom_vline(data = dat_i %>% filter(N == i),
+  geom_vline(data = dat_tail,
              aes(xintercept = mean),
              color = "red", size = 1) +
   scale_x_continuous(limits = c(-.l, .l)) +
