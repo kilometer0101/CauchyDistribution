@@ -160,11 +160,7 @@ g <-
              heights = c(0.5, 0.7, 1, 1))
 ```
 
+![](fig/chauchydist.png)
 
-```r
-g
-```
-
-![](README_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 
