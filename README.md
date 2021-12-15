@@ -160,6 +160,12 @@ g <-
              heights = c(0.5, 0.7, 1, 1))
 ```
 
+
+```r
+ggsave("fig/chauchydist.png", g, width = 5, height = 6)
+```
+
+
 ![](fig/chauchydist.png)
 
 
