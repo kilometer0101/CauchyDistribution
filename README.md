@@ -186,5 +186,9 @@ ggsave("fig/cauchydist.png", g, width = 5, height = 6)
 
 ![](fig/cauchydist.png)
 
+補足: 確率密度関数
+
+![](fig/pdf.png)
+
 
 
