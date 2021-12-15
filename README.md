@@ -68,10 +68,10 @@ g_plot <-
              aes(xintercept = val), 
              color = "red", linetype = "dotted") +
   geom_path(data = en,
-            aes(x, y), 
+            aes(x = x, y = y), 
             alpha  = 0.5) +
   geom_path(data = en %>% filter(theta <= df_cauchy$theta[i]),
-            aes(y, x), 
+            aes(x = y, y = x), 
             color = "blue", size = 0.5) +
   geom_segment(data = df_cauchy %>% filter(N == i),
                aes(x = x, y = y),
@@ -94,10 +94,10 @@ g_plot <-
   geom_point(aes(val, 0), 
              color = "red", alpha = .alpha, size = 0.5) +
   geom_point(data = df_cauchy %>% filter(N == i),
-             aes(x, y), 
+             aes(x = x, y = y), 
              color = "blue") +
   geom_point(data = df_cauchy %>% filter(N == i),
-             aes(val, 0), 
+             aes(x = val, y = 0), 
              color = "red", size = 1.5) +
   geom_text(data = df_cauchy %>% filter(N == i),
             aes(label = str_c("N=", N)),
