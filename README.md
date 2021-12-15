@@ -100,7 +100,7 @@ g_plot <-
                y = 0, yend = 1, xend = 0, 
                color = "pink") +
   geom_point(x = 0, y = 1) +
-  geom_point(aes(val, 0), 
+  geom_point(aes(x = val, y = 0), 
              color = "red", alpha = .alpha, size = 0.5) +
   geom_point(data = df_cauchy %>% filter(N == i),
              aes(x = x, y = y), 
