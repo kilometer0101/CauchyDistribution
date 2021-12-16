@@ -22,6 +22,7 @@ output:
 ```r
 library(tidyverse)
 library(patchwork)
+theme_set(theme_classic())
 ```
 
 サンプリング
@@ -38,9 +39,7 @@ df_cauchy <-
   mutate(val = 1 / tan(theta / 2)) %>% 
   mutate(mean = cumsum(val) / N) %>% 
   mutate(x = sin(theta),
-         y = cos(theta)) %>% 
-  mutate(xend = 0,
-         yend = 1)
+         y = cos(theta))
 ```
 
 単位円描画用のデータフレーム(θの取り方の問題でx,yはあえて逆にしてある)
@@ -74,37 +73,47 @@ dat_tail <-
 # 単位円と3点の描画
 g_plot <-
   ggplot(data = dat_i) +
-  aes(x = x, y = y) +
-  geom_hline(yintercept = 0, color = "darkgrey") +
-  geom_vline(xintercept = 0, color = "darkgrey") +
+  aes(x = x, 
+      y = y) +
+  geom_hline(yintercept = 0, 
+             color = "darkgrey") +
+  geom_vline(xintercept = 0, 
+             color = "darkgrey") +
   # 赤破線
   geom_vline(data = dat_tail,
              aes(xintercept = val), 
-             color = "red", linetype = "dotted") +
+             color = "red", 
+             linetype = "dotted") +
   # 単位円
   geom_path(data = en,
-            alpha  = 0.5) +
+            color = "grey") +
   # 該当する角度まで青の円弧
   geom_path(data = en %>% filter(theta <= dat_tail$theta),
-            color = "blue", size = 0.5) +
+            color = "blue", 
+            size = 0.5) +
   # 原点-青点の線分
   geom_segment(data = dat_tail,
-               yend = 0, xend = 0, 
+               xend = 0, 
+               yend = 0, 
                color = "skyblue") +
   # 青点-黒点
   geom_segment(data = dat_tail,
-               yend = 1, xend = 0, 
+               xend = 0, 
+               yend = 1, 
                color = "pink") +
   # 赤点-黒点
   geom_segment(data = dat_tail,
                aes(x = val),
-               y = 0, yend = 1, xend = 0, 
+               y = 0, 
+               xend = 0, 
+               yend = 1, 
                color = "pink") +
-  # 赤点がx範囲外の時：yがy範囲外なら描画されない
+  # 赤線（赤点がx範囲外の時）：yがy範囲外なら描画されない
   geom_segment(data = dat_tail,
                aes(x = x / abs(x) * .l, 
                    y = 1 - (1 - y) / abs(x) * .l),
-               yend = 1, xend = 0, 
+               xend = 0, 
+               yend = 1, 
                color = "pink") +
   # 黒点
   geom_point(x = 0, y = 1) +
@@ -112,41 +121,51 @@ g_plot <-
   geom_point(data = dat_tail,
              color = "blue") +
   # これまでの赤点の重ね書き
-  geom_point(aes(x = val, y = 0), 
-             color = "red", alpha = .alpha, size = 0.5) +
+  geom_point(aes(x = val, 
+                 y = 0), 
+             color = "red", 
+             alpha = .alpha, 
+             size = 0.5) +
   # 赤点
   geom_point(data = dat_tail,
-             aes(x = val, y = 0), 
-             color = "red", size = 1.5) +
+             aes(x = val, 
+                 y = 0), 
+             color = "red", 
+             size = 1.5) +
   # ラベル
   geom_text(data = dat_tail,
             aes(label = str_c("N=", N)),
-            x = -.l, y = 1, 
-            hjust = 0, vjust = 1) +
+            x = -.l, 
+            y = 1, 
+            hjust = 0, 
+            vjust = 1) +
   scale_x_continuous(limits = c(-.l, .l)) +
   scale_y_continuous(limits = c(-1, 1)) +
-  theme_classic() +
   coord_fixed()
 
 # thetaの確率密度分布
 g_dens_u <-
   ggplot(data = dat_i) +
   aes(x = theta) +
-  geom_density(color = "blue", fill = "skyblue") +
+  geom_density(color = "blue", 
+               fill = "skyblue") +
   geom_vline(data = dat_tail,
              aes(xintercept = theta),
-             color = "blue", linetype = "dotted") +
+             color = "blue", 
+             linetype = "dotted") +
   geom_point(y = 0, 
-             color = "blue", alpha = .alpha, size = 0.5) +
+             color = "blue", 
+             alpha = .alpha, 
+             size = 0.5) +
   geom_point(data = dat_tail,
              y = 0, 
-             color = "blue", size = 1) +
+             color = "blue", 
+             size = 1) +
   scale_x_continuous(limits = c(0, 2 * pi),
                      breaks = c(0, pi, 2 * pi),
                      labels = c("0", "pi", "2pi")) +
   scale_y_continuous(limits = c(0, NA),
                      expand = c(0.1, 0)) +
-  theme_classic() +
   xlab("theta") +
   ylab("density")
 
@@ -154,31 +173,37 @@ g_dens_u <-
 g_dens <-
   ggplot(data = dat_i) +
   aes(x = val) +
-  geom_density(color = "red", fill = "pink") +
-  geom_vline(xintercept = 0, color = "darkgrey") +
+  geom_density(color = "red", 
+               fill = "pink") +
+  geom_vline(xintercept = 0, 
+             color = "darkgrey") +
   geom_point(y = 0, 
-             color = "red", alpha = .alpha) +
+             color = "red", 
+             alpha = .alpha) +
   geom_vline(data = dat_tail,
              aes(xintercept = val),
-             color = "red", linetype = "dotted") +
+             color = "red", 
+             linetype = "dotted") +
   geom_vline(data = dat_tail,
              aes(xintercept = mean),
-             color = "red", size = 1) +
+             color = "red", 
+             size = 1) +
   scale_x_continuous(limits = c(-.l, .l)) +
   scale_y_continuous(limits = c(0, NA),
                      expand = c(0.1, 0)) +
-  theme_classic() +
   theme(axis.title.x = element_blank()) +
   ylab("density")
 
 # xの平均の推移
 g_mean <-
   ggplot(data = dat_i) +
-  aes(x = mean, y = N) +
-  geom_vline(xintercept = 0, color = "darkgrey") +
-  geom_path(color = "red", size = 1) +
-  scale_x_continuous(limits = c(-.l, .l)) +
-  theme_classic()
+  aes(x = mean, 
+      y = N) +
+  geom_vline(xintercept = 0, 
+             color = "darkgrey") +
+  geom_path(color = "red", 
+            size = 1) +
+  scale_x_continuous(limits = c(-.l, .l))
 ```
 
 図の合成
