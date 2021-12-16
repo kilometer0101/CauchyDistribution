@@ -82,7 +82,7 @@ g_plot <-
              color = "red", linetype = "dotted") +
   geom_path(data = en,
             alpha  = 0.5) +
-  geom_path(data = en %>% filter(theta <= df_cauchy$theta[i]),
+  geom_path(data = en %>% filter(theta <= dat_tail$theta),
             color = "blue", size = 0.5) +
   geom_segment(data = dat_tail,
                yend = 0, xend = 0, 
