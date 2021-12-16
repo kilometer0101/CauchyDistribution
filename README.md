@@ -77,36 +77,48 @@ g_plot <-
   aes(x = x, y = y) +
   geom_hline(yintercept = 0, color = "darkgrey") +
   geom_vline(xintercept = 0, color = "darkgrey") +
+  # 赤破線
   geom_vline(data = dat_tail,
              aes(xintercept = val), 
              color = "red", linetype = "dotted") +
+  # 単位円
   geom_path(data = en,
             alpha  = 0.5) +
+  # 該当する角度まで青の円弧
   geom_path(data = en %>% filter(theta <= dat_tail$theta),
             color = "blue", size = 0.5) +
+  # 原点-青点の線分
   geom_segment(data = dat_tail,
                yend = 0, xend = 0, 
                color = "skyblue") +
+  # 青点-黒点
   geom_segment(data = dat_tail,
                yend = 1, xend = 0, 
                color = "pink") +
+  # 赤点-黒点
+  geom_segment(data = dat_tail,
+               aes(x = val),
+               y = 0, yend = 1, xend = 0, 
+               color = "pink") +
+  # 赤点がx範囲外の時：yがy範囲外なら描画されない
   geom_segment(data = dat_tail,
                aes(x = x / abs(x) * .l, 
                    y = 1 - (1 - y) / abs(x) * .l),
                yend = 1, xend = 0, 
                color = "pink") +
-  geom_segment(data = dat_tail,
-               aes(x = val),
-               y = 0, yend = 1, xend = 0, 
-               color = "pink") +
+  # 黒点
   geom_point(x = 0, y = 1) +
-  geom_point(aes(x = val, y = 0), 
-             color = "red", alpha = .alpha, size = 0.5) +
+  # 青点
   geom_point(data = dat_tail,
              color = "blue") +
+  # これまでの赤点の重ね書き
+  geom_point(aes(x = val, y = 0), 
+             color = "red", alpha = .alpha, size = 0.5) +
+  # 赤点
   geom_point(data = dat_tail,
              aes(x = val, y = 0), 
              color = "red", size = 1.5) +
+  # ラベル
   geom_text(data = dat_tail,
             aes(label = str_c("N=", N)),
             x = -.l, y = 1, 
